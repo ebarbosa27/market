@@ -34,7 +34,7 @@ describe("Database schema", () => {
         { column_name: "id", data_type: "integer", is_nullable: "NO" },
         { column_name: "date", data_type: "date", is_nullable: "NO" },
         { column_name: "note", data_type: "text", is_nullable: "YES" },
-        { column_name: "user_id", data_type: "integer", is_nullable: "YES" },
+        { column_name: "user_id", data_type: "integer", is_nullable: "NO" },
       ]),
     );
 
