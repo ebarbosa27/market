@@ -41,9 +41,9 @@ table products {
   price decimal [not null]
 }
 
-Ref: users.id < orders.user_id
-Ref: orders.id < orders_products.order_id
-Ref: products.id < orders_products.product_id
+Ref: users.id < orders.user_id [delete: cascade]
+Ref: orders.id < orders_products.order_id [delete: cascade]
+Ref: products.id < orders_products.product_id [delete: cascade]
 ```
 
 </details>
