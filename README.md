@@ -78,7 +78,7 @@ If a valid token is not provided, immediately send a 401 Unauthorized error.
   - sends 404 if the product with that id does not exist
   - sends the specific product
 - 🔒 `GET /products/:id/orders`
-  - sends 404 if the product with that id does not exist
+  - sends 404 if the product with that id does not exist (even if the user is logged in!)
   - sends an array of all orders made by the user that include this product
 
 `/orders` router

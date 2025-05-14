@@ -271,18 +271,18 @@ describe("orders", () => {
   });
 
   describe("GET /products/:id/orders", () => {
+    it("sends 404 if the product does not exist (even if user is logged in)", async () => {
+      const response = await request(app)
+        .get("/products/" + (lastProduct.id + 1) + "/orders")
+        .set("Authorization", `Bearer ${token}`);
+      expect(response.status).toBe(404);
+    });
+
     it("sends 401 if the user is not logged in", async () => {
       const response = await request(app).get(
         "/products/" + lastProduct.id + "/orders",
       );
       expect(response.status).toBe(401);
-    });
-
-    it("sends 404 if the product does not exist", async () => {
-      const response = await request(app).get(
-        "/products/" + (lastProduct.id + 1) + "/orders",
-      );
-      expect(response.status).toBe(404);
     });
 
     it("sends array of all orders made by the user that include this product", async () => {
