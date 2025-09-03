@@ -24,10 +24,8 @@ CREATE TABLE products (
 );
 
 CREATE TABLE orders_products (
-  id serial PRIMARY KEY,
   quantity int NOT NULL,
-
   order_id int NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
   product_id int NOT NULL REFERENCES products(id) ON DELETE CASCADE,
-  UNIQUE(order_id, product_id)
+  PRIMARY KEY(order_id, product_id)
 );

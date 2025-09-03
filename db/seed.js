@@ -10,6 +10,16 @@ await db.end();
 console.log("🌱 Database seeded.");
 
 async function seed() {
+  // Create 15 products
+  for (let i = 1; i <= 15; i++) {
+    const product = {
+      title: faker.commerce.product(),
+      price: faker.commerce.price(),
+      description: faker.commerce.productDescription(),
+    };
+    await createProduct(product);
+  }
+
   // Create 5 Users
   for (let i = 1; i <= 5; i++) {
     const user = {
@@ -24,34 +34,20 @@ async function seed() {
     const order = {
       date: faker.date.anytime(),
       note: faker.lorem.sentence(),
-      userId: Math.ceil(Math.random() * 5),
+      userId: i,
     };
     await createOrder(order);
-  }
 
-  // Create 15 products
-  for (let i = 1; i <= 15; i++) {
-    const product = {
-      title: faker.commerce.product(),
-      price: faker.commerce.price(),
-      description: faker.commerce.productDescription(),
-    };
-    await createProduct(product);
-  }
-
-  // Have those orders include 5 items
-  for (let i = 1; i <= 15; i++) {
-    try {
-      const orderProduct = {
-        orderId: Math.ceil(Math.random() * 5),
-        productId: Math.ceil(Math.random() * 15),
-        quantity: Math.ceil(Math.random() * 5),
-      };
-      await createOrderProduct(orderProduct);
-    } catch (err) {
-      if (err.code == "23505") {
-        i--;
-        // console.error("Product order already exists. Rerolling...");
+    for (let j = 1; j <= 5; j++) {
+      try {
+        const orderProduct = {
+          orderId: i,
+          productId: Math.ceil(Math.random() * 15),
+          quantity: Math.ceil(Math.random() * 5),
+        };
+        await createOrderProduct(orderProduct);
+      } catch (err) {
+        if ((err.code = "23505")) j--;
       }
     }
   }
