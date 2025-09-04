@@ -58,6 +58,5 @@ router
   })
   .get(async (req, res) => {
     const orders = await getProductsByOrderId(req.order.id);
-    console.log(orders);
     res.send(orders);
   });

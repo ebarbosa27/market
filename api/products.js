@@ -24,13 +24,12 @@ router.route("/:id").get((req, res) => {
 
 router.use(requireUser);
 
-// router.route("/:id/orders").get(async (req, res) => {
-//   const productId = req.product.id;
-//   const userId = req.user.id;
-//   console.log(req.user);
+router.route("/:id/orders").get(async (req, res) => {
+  const productId = req.product.id;
+  const userId = req.user.id;
 
-//   const orders = await getOrdersByProductId(productId, userId);
-//   if (orders.length <= 0) res.status(404).send("Orders do not exists.");
+  const orders = await getOrdersByProductId(productId, userId);
+  if (orders.length <= 0) res.status(404).send("Orders do not exists.");
 
-//   res.send(orders);
-// });
+  res.send(orders);
+});
